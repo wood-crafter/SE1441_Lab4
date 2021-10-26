@@ -53,15 +53,39 @@ namespace SE1441_Chap23_02
 
         protected void btnCancer_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect(Request.RawUrl);
         }
 
         protected void btnPlace_Click(object sender, EventArgs e)
         {
-            SqlCommand cmd = new SqlCommand("INSERT INTO Items VALUES('" + ddlItemType.SelectedValue +"',  '"+ txtItemName.Text +"', '"+ txtItemDes.Text + "', '" + ddlSeller.SelectedValue + "', '" + txtMinimum.Text +"', '"+ txtEndDateTime.Text +"', '"+ txtCurrent.Text +"')", con);
+            int itemtype = Convert.ToInt32(ddlItemType.SelectedValue.ToString());
+            string itemname = txtItemName.Text.Trim();
+            string itemdes = txtItemDes.Text.Trim();
+            string sellerid = ddlSeller.SelectedValue.ToString();
+            string minimumbid = txtMinimum.Text.Trim();
+            DateTime date = DateTime.ParseExact(txtEndDateTime.Text,
+                    "dd/MM/yyyy, HH:mm", CultureInfo.InvariantCulture);
+            string currentprice = txtCurrent.Text.Trim();
+
+            int seller = Convert.ToInt32(sellerid);
+            float minimum = (float)Convert.ToDouble(minimumbid);
+            float current = (float)Convert.ToDouble(currentprice);
+
+            string Query = string.Format("INSERT INTO Items VALUES('{0}','{1}','{2}','{3}','{4}','{5}','{6}')"
+                ,itemtype,itemname,itemdes,seller,minimum,date,current);
+            SqlCommand cmd = new SqlCommand(Query,con);
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
+
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "alert('A bid item is added!')", true);
+            ddlSeller.ClearSelection();
+            ddlItemType.ClearSelection();
+            txtItemName.Text = "";
+            txtItemDes.Text = "";
+            txtCurrent.Text = "";
+            txtMinimum.Text = "";
+            
         }
     }
 }
