@@ -8,9 +8,12 @@ using System.Configuration;
 
 namespace AuctionWindow.DAL
 {
-    class DAO
+   class DAO
     {
         static string strConn = ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ConnectionString;
+        /*SqlConnection cnn; //Ket noi DB
+        SqlDataAdapter da; //Xu ly cac cau lenh SQL: Select
+        SqlCommand cmd; //Thuc thi cau lenh insert,update,delete*/
         static public DataTable GetDataTable(string sqlSelect)
         {
             try
@@ -47,6 +50,14 @@ namespace AuctionWindow.DAL
             }
         }
 
+        static public SqlDataReader executeQuery1(string strSelect)
+        {
+            SqlConnection conn = new SqlConnection(strConn);
+            SqlCommand command = new SqlCommand(strSelect, conn);
+            conn.Open();
+            SqlDataReader rd = command.ExecuteReader();
+            return rd;
+        }
         static public bool UpdateTable(SqlCommand cmd)
         {
             try
