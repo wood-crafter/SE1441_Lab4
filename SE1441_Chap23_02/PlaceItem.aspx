@@ -89,7 +89,7 @@
                     <asp:Button ID="btnPlace" runat="server" OnClick="btnPlace_Click" Text="Place" Width="70px" />
                 </td>
                 <td>
-                    <asp:Button ID="btnCancer" runat="server" OnClick="btnCancer_Click" Text="Cancer" />
+                    <asp:Button ID="btnCancer" runat="server" OnClick="btnCancer_Click" Text="Cancel" />
                 </td>
             </tr>
             <tr>

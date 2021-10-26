@@ -21,6 +21,12 @@ namespace SE1441_Chap23_02
                 DropDownListSeller.DataTextField = "Name";
                 DropDownListSeller.DataValueField = "MemberID";
                 DropDownListSeller.DataBind();
+                DropDownListSeller.SelectedIndex = 0;
+
+                DropDownListItem.DataSource = DAO.GetDataTable("SELECT * FROM Items where SellerID = " + DropDownListSeller.SelectedValue + "");
+                DropDownListItem.DataTextField = "ItemName";
+                DropDownListItem.DataValueField = "ItemID";
+                DropDownListItem.DataBind();
             }
                 lblCheck.Text = "";
         }
