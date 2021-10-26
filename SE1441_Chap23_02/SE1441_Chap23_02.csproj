@@ -84,6 +84,7 @@
     <Compile Include="Display.aspx.designer.cs">
       <DependentUpon>Display.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Entity\BidSearch.cs" />
     <Compile Include="ItemGUI.aspx.cs">
       <DependentUpon>ItemGUI.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
